@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "Specialist mid-market AI partner with proprietary accelerators. Stack-agnostic, full-stack delivery from discovery to adoption.",
 };
 
-export default function RootLayout({
+export function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -31,3 +31,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export default RootLayout;

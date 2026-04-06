@@ -220,14 +220,23 @@ const testimonials = [
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-export default function Home() {
+export function Home() {
   return (
     <>
       {/* ── 1. Hero ─────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-accent/10 via-background to-background" />
 
-        <div className="relative max-w-5xl mx-auto text-center">
+        {/* Visual anchor — brain logo */}
+        <img
+          src="/brainDark.svg"
+          alt=""
+          aria-hidden="true"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] md:w-[400px] lg:w-[500px] opacity-[0.06] pointer-events-none select-none"
+          style={{ filter: "drop-shadow(0 0 80px rgba(124, 58, 237, 0.3))" }}
+        />
+
+        <div className="relative max-w-3xl mx-auto text-center">
           <AnimatedHeadline
             text="Production AI in weeks, not months"
             className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-8"
@@ -274,15 +283,13 @@ export default function Home() {
             />
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3">
             {differentiators.map((d, i) => (
               <AnimatedSection key={d.title} animation="fade-up" delay={i * 0.1}>
-                <div className="card-flip bg-surface border border-border rounded-sm p-8 h-full">
-                  <d.icon className="card-flip-icon w-8 h-8 text-accent mb-5" />
+                <div className={`py-2 px-8 h-full ${i > 0 ? "md:border-l md:border-border" : ""}`}>
+                  <d.icon className="w-8 h-8 text-accent mb-5" />
                   <h3 className="text-xl font-bold mb-3">{d.title}</h3>
-                  <p className="card-flip-muted text-muted leading-relaxed">
-                    {d.description}
-                  </p>
+                  <p className="text-muted leading-relaxed">{d.description}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -378,10 +385,10 @@ export default function Home() {
             />
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {marketStats.map((s, i) => (
               <AnimatedSection key={s.stat} animation="fade-up" delay={i * 0.1}>
-                <div className="bg-background border border-border rounded-sm p-8 text-center">
+                <div className={`py-2 px-8 text-center ${i > 0 ? "lg:border-l lg:border-border" : ""}`}>
                   <p className="text-5xl font-bold text-accent mb-3">
                     {s.stat}
                   </p>
@@ -490,3 +497,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;

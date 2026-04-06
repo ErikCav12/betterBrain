@@ -42,11 +42,11 @@ const tier2Partners = [
   { name: "DataRobot", description: "ML governance" },
 ];
 
-export default function PartnersPage() {
+export function PartnersPage() {
   return (
     <>
       <section className="pt-32 pb-16 px-6">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           <AnimatedHeadline
             text="Our technology partners"
             className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
@@ -163,3 +163,5 @@ export default function PartnersPage() {
     </>
   );
 }
+
+export default PartnersPage;

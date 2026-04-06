@@ -19,7 +19,7 @@ export function DualCTA({ className = "" }: DualCTAProps) {
         Book a Discovery Workshop
       </Button>
       <Button
-        href="/contact#assessment"
+        href="https://ai-assessment.betterbrain.ai/assessment?ref=P3B12C892-GENERAL-45BA67&type=general"
         variant="secondary"
         size="lg"
         icon={<ClipboardCheck className="w-5 h-5" />}

@@ -47,11 +47,11 @@ const securityCards = [
   { icon: Check, title: "AI Governance", description: "Bias testing, model monitoring, and explainability baked into every deployment." },
 ];
 
-export default function AboutPage() {
+export function AboutPage() {
   return (
     <main className="bg-background text-foreground">
       {/* Hero */}
-      <section className="pt-32 pb-16 max-w-5xl mx-auto px-6">
+      <section className="pt-32 pb-16 max-w-3xl mx-auto px-6">
         <AnimatedSection animation="fade-up">
           <AnimatedHeadline
             text="We build AI that ships"
@@ -107,11 +107,11 @@ export default function AboutPage() {
               centered
             />
           </AnimatedSection>
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
+          <div className="grid md:grid-cols-3 mt-16">
             {differentiators.map((item, i) => (
               <AnimatedSection key={item.title} animation="fade-up" delay={i * 150}>
-                <div className="card-flip rounded-sm border border-border p-8">
-                  <div className="card-flip-icon w-12 h-12 rounded-sm bg-accent/10 flex items-center justify-center mb-6">
+                <div className={`py-2 px-8 ${i > 0 ? "md:border-l md:border-border" : ""}`}>
+                  <div className="w-12 h-12 rounded-sm bg-accent/10 flex items-center justify-center mb-6">
                     <item.icon className="w-6 h-6 text-accent" />
                   </div>
                   <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
@@ -213,3 +213,5 @@ export default function AboutPage() {
     </main>
   );
 }
+
+export default AboutPage;

@@ -98,7 +98,7 @@ export function generateStaticParams() {
   return Object.keys(articleData).map((slug) => ({ slug }));
 }
 
-export default async function ArticlePage({
+export async function ArticlePage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -161,3 +161,5 @@ export default async function ArticlePage({
     </>
   );
 }
+
+export default ArticlePage;

@@ -8,14 +8,14 @@ import { Button } from "@/components/ui/Button";
 import { Calendar, ClipboardCheck, Check } from "lucide-react";
 import { useState } from "react";
 
-export default function ContactPage() {
+export function ContactPage() {
   const [workshopSubmitted, setWorkshopSubmitted] = useState(false);
   const [assessmentSubmitted, setAssessmentSubmitted] = useState(false);
 
   return (
     <>
       <section className="pt-32 pb-8 px-6">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           <AnimatedHeadline
             text="Let's build something together"
             className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
@@ -166,3 +166,5 @@ export default function ContactPage() {
     </>
   );
 }
+
+export default ContactPage;

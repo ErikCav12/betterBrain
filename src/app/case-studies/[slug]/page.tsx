@@ -125,7 +125,7 @@ export function generateStaticParams() {
   return Object.keys(caseStudyData).map((slug) => ({ slug }));
 }
 
-export default async function CaseStudyPage({
+export async function CaseStudyPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -235,3 +235,5 @@ export default async function CaseStudyPage({
     </>
   );
 }
+
+export default CaseStudyPage;

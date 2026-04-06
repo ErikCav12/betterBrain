@@ -64,11 +64,11 @@ const caseStudies = [
   },
 ];
 
-export default function CaseStudiesPage() {
+export function CaseStudiesPage() {
   return (
     <main className="bg-background text-foreground">
       {/* Hero */}
-      <section className="pt-32 pb-16 max-w-5xl mx-auto px-6">
+      <section className="pt-32 pb-16 max-w-3xl mx-auto px-6">
         <AnimatedSection animation="fade-up">
           <AnimatedHeadline
             text="Real results from real teams"
@@ -151,3 +151,5 @@ export default function CaseStudiesPage() {
     </main>
   );
 }
+
+export default CaseStudiesPage;

@@ -99,12 +99,12 @@ const articles = [
   },
 ];
 
-export default function IndustriesInsightsPage() {
+export function IndustriesInsightsPage() {
   return (
     <>
       {/* Hero */}
       <section className="pt-32 pb-16 px-6">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           <AnimatedHeadline
             text="Industries we serve and ideas we share"
             className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
@@ -269,3 +269,5 @@ export default function IndustriesInsightsPage() {
     </>
   );
 }
+
+export default IndustriesInsightsPage;

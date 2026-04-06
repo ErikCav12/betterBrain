@@ -39,6 +39,15 @@ export function Button({
   const classes = `inline-flex items-center justify-center gap-2 font-medium transition-all rounded-sm ${variants[variant]} ${sizes[size]} ${className}`;
 
   if (href) {
+    const isExternal = href.startsWith("http");
+    if (isExternal) {
+      return (
+        <a href={href} className={classes} target="_blank" rel="noopener noreferrer">
+          {icon}
+          {children}
+        </a>
+      );
+    }
     return (
       <Link href={href} className={classes}>
         {icon}

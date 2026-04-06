@@ -193,12 +193,12 @@ const capabilities: Capability[] = [
 
 /* ─── Page ─── */
 
-export default function SolutionsPage() {
+export function SolutionsPage() {
   return (
     <>
       {/* Hero */}
       <section className="pt-32 pb-16 px-6">
-        <div className="max-w-5xl mx-auto text-center">
+        <div className="max-w-3xl mx-auto text-center">
           <AnimatedHeadline
             text="Six accelerators. Proven across dozens of deployments."
             className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
@@ -327,10 +327,10 @@ export default function SolutionsPage() {
             />
           </AnimatedSection>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-6">
             {capabilities.map((cap, i) => (
               <AnimatedSection key={cap.title} animation="fade-up" delay={i * 0.05}>
-                <div className="card-flip bg-surface border border-border rounded-sm p-5">
+                <div className="border-b border-border pb-4">
                   <h4 className="font-semibold text-foreground mb-1 text-sm">
                     {cap.title}
                   </h4>
@@ -358,3 +358,5 @@ export default function SolutionsPage() {
     </>
   );
 }
+
+export default SolutionsPage;
