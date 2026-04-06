@@ -3,14 +3,12 @@
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Input } from "@/components/ui/Input";
-import { Textarea } from "@/components/ui/Textarea";
 import { Button } from "@/components/ui/Button";
 import { Calendar, ClipboardCheck, Check } from "lucide-react";
 import { useState } from "react";
 
 export function ContactPage() {
   const [workshopSubmitted, setWorkshopSubmitted] = useState(false);
-  const [assessmentSubmitted, setAssessmentSubmitted] = useState(false);
 
   return (
     <>
@@ -100,65 +98,23 @@ export function ContactPage() {
 
           {/* AI Readiness Assessment */}
           <AnimatedSection animation="fade-up" delay={0.15} id="assessment">
-            <div className="bg-surface border border-border rounded-sm p-8 h-full flex flex-col">
-              <div className="flex items-center gap-3 mb-4">
-                <ClipboardCheck className="w-6 h-6 text-accent" />
-                <h2 className="text-2xl font-bold">AI Readiness Assessment</h2>
-              </div>
-              <p className="text-muted mb-6">
-                Tell us about your use case and our consultants will reach out
-                with a tailored assessment of your AI readiness and
+            <div className="bg-surface border border-border rounded-sm p-8 h-full flex flex-col items-center justify-center text-center">
+              <ClipboardCheck className="w-12 h-12 text-accent mb-6" />
+              <h2 className="text-2xl font-bold mb-4">AI Readiness Assessment</h2>
+              <p className="text-muted mb-8 max-w-sm">
+                Take our self-serve assessment and our consultants will reach
+                out with a tailored analysis of your AI readiness and
                 opportunities.
               </p>
-
-              {assessmentSubmitted ? (
-                <div className="flex-1 flex items-center justify-center text-center py-8">
-                  <div>
-                    <div className="w-16 h-16 bg-accent/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Check className="w-8 h-8 text-accent" />
-                    </div>
-                    <h3 className="text-xl font-bold mb-2">Assessment received!</h3>
-                    <p className="text-muted">
-                      Our team will review and reach out within 48 hours.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setAssessmentSubmitted(true);
-                  }}
-                  className="flex-1 flex flex-col"
-                >
-                  <div className="space-y-4 flex-1">
-                    <div className="grid grid-cols-2 gap-4">
-                      <Input label="First name" required name="firstName" />
-                      <Input label="Last name" required name="lastName" />
-                    </div>
-                    <Input
-                      label="Work email"
-                      type="email"
-                      required
-                      name="email"
-                    />
-                    <Input label="Company" required name="company" />
-                    <Input label="Job title" name="jobTitle" />
-                    <Textarea
-                      label="Tell us about your use case"
-                      name="useCase"
-                      required
-                    />
-                  </div>
-                  <Button
-                    type="submit"
-                    variant="secondary"
-                    className="w-full mt-6"
-                  >
-                    Submit Assessment
-                  </Button>
-                </form>
-              )}
+              <Button
+                href="https://ai-assessment.betterbrain.ai/assessment?ref=P3B12C892-GENERAL-45BA67&type=general"
+                variant="secondary"
+                size="lg"
+                icon={<ClipboardCheck className="w-5 h-5" />}
+              >
+                Start Assessment
+              </Button>
+              <p className="text-muted/60 text-xs mt-4">Takes about 5 minutes</p>
             </div>
           </AnimatedSection>
         </div>
