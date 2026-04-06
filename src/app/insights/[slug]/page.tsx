@@ -114,7 +114,7 @@ export async function ArticlePage({
         <div className="max-w-3xl mx-auto">
           <AnimatedSection animation="fade-up">
             <Link
-              href="/industries-insights"
+              href="/insights"
               className="text-accent text-sm font-medium hover:text-accent-light transition-colors mb-6 inline-flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />

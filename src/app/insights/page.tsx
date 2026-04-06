@@ -3,44 +3,8 @@
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { DualCTA } from "@/components/DualCTA";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
-import {
-  Landmark,
-  Scale,
-  TrendingUp,
-  FileText,
-  Shield,
-  Search,
-} from "lucide-react";
 import Link from "next/link";
-
-const industries = [
-  {
-    name: "Financial Services",
-    icon: Landmark,
-    target: "Regional banks, credit unions, insurance brokers, fintechs (50-500 employees)",
-    stat: "80%+ of banks already use AI tools",
-    useCases: [
-      { icon: Shield, label: "Fraud detection & risk assessment" },
-      { icon: FileText, label: "Compliance monitoring & reporting" },
-      { icon: Search, label: "RAG for regulatory documents" },
-      { icon: TrendingUp, label: "Predictive analytics for portfolio management" },
-    ],
-  },
-  {
-    name: "Legal & Professional Services",
-    icon: Scale,
-    target: "Law firms, corporate legal departments, compliance-heavy services (50-500 employees)",
-    stat: "Contract review is the highest-ROI AI use case across all industries",
-    useCases: [
-      { icon: FileText, label: "Contract review & analysis" },
-      { icon: Search, label: "Case law RAG & legal research" },
-      { icon: Shield, label: "Entity recognition & classification" },
-      { icon: TrendingUp, label: "Document processing & OCR" },
-    ],
-  },
-];
 
 const articles = [
   {
@@ -99,88 +63,32 @@ const articles = [
   },
 ];
 
-export function IndustriesInsightsPage() {
+export function InsightsPage() {
   return (
     <>
       {/* Hero */}
       <section className="pt-32 pb-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedHeadline
-            text="Industries we serve and ideas we share"
+            text="Insights and thought leadership"
             className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
           />
           <AnimatedSection animation="fade-up" delay={0.4}>
-            <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto">
-              Deep expertise in high-value verticals, backed by cross-cutting
-              thought leadership on AI strategy and implementation.
+            <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto">
+              Perspectives on AI strategy, implementation, and the future of
+              enterprise intelligence.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Industry Verticals */}
+      {/* Featured */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection>
-            <SectionHeading
-              label="Industry Expertise"
-              title="Verticals we know deeply"
-              subtitle="Technology, finance, ecommerce, healthcare, legal, manufacturing, and logistics."
-            />
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {industries.map((industry, i) => (
-              <AnimatedSection
-                key={industry.name}
-                animation="fade-up"
-                delay={i * 0.15}
-              >
-                <div className="bg-surface border border-border rounded-sm p-8 h-full">
-                  <div className="flex items-center gap-3 mb-4">
-                    <industry.icon className="w-7 h-7 text-accent" />
-                    <h3 className="text-2xl font-bold">{industry.name}</h3>
-                  </div>
-                  <p className="text-muted text-sm mb-2">{industry.target}</p>
-                  <div className="inline-block bg-accent/10 border border-accent/20 rounded-sm px-3 py-1 mb-6">
-                    <span className="text-accent text-sm font-medium">
-                      {industry.stat}
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {industry.useCases.map((uc) => (
-                      <div
-                        key={uc.label}
-                        className="flex items-start gap-2 text-sm"
-                      >
-                        <uc.icon className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-                        <span className="text-muted">{uc.label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Thought Leadership */}
-      <section className="py-24 px-6 bg-surface">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection>
-            <SectionHeading
-              label="Insights"
-              title="Thought leadership"
-              subtitle="Perspectives on AI strategy, implementation, and the future of enterprise intelligence."
-            />
-          </AnimatedSection>
-
-          {/* Featured */}
           <AnimatedSection animation="fade-up" className="mb-8">
             <Link
-              href={`/industries-insights/${articles[0].slug}`}
-              className="block card-flip bg-background border border-border rounded-sm p-10 md:p-14 group"
+              href={`/insights/${articles[0].slug}`}
+              className="block card-flip bg-surface border border-border rounded-sm p-10 md:p-14"
             >
               <span className="text-accent text-sm font-semibold tracking-wider uppercase">
                 {articles[0].category}
@@ -208,8 +116,8 @@ export function IndustriesInsightsPage() {
                 delay={i * 0.1}
               >
                 <Link
-                  href={`/industries-insights/${article.slug}`}
-                  className="block card-flip bg-background border border-border rounded-sm p-8 h-full"
+                  href={`/insights/${article.slug}`}
+                  className="block card-flip bg-surface border border-border rounded-sm p-8 h-full"
                 >
                   <span className="text-accent text-sm font-semibold tracking-wider uppercase">
                     {article.category}
@@ -233,11 +141,11 @@ export function IndustriesInsightsPage() {
       </section>
 
       {/* Newsletter */}
-      <section className="py-24 px-6">
+      <section className="py-24 px-6 bg-surface">
         <AnimatedSection className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Stay informed</h2>
           <p className="text-muted text-lg mb-8">
-            Get the latest insights on AI strategy and implementation.
+            Get the latest on AI strategy and implementation.
           </p>
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -246,7 +154,7 @@ export function IndustriesInsightsPage() {
             <input
               type="email"
               placeholder="Your email"
-              className="flex-1 bg-surface border border-border rounded-sm px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors"
+              className="flex-1 bg-background border border-border rounded-sm px-4 py-3 text-sm focus:outline-none focus:border-accent transition-colors"
             />
             <Button type="submit" variant="primary">
               Subscribe
@@ -256,11 +164,11 @@ export function IndustriesInsightsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-surface">
+      <section className="py-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <AnimatedSection>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              See how AI applies to your industry
+              Ready to put these ideas into practice?
             </h2>
             <DualCTA />
           </AnimatedSection>
@@ -270,4 +178,4 @@ export function IndustriesInsightsPage() {
   );
 }
 
-export default IndustriesInsightsPage;
+export default InsightsPage;

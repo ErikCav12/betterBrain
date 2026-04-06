@@ -9,13 +9,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/insights",
-        destination: "/industries-insights",
+        source: "/industries-insights",
+        destination: "/insights",
         permanent: true,
       },
       {
-        source: "/insights/:slug",
-        destination: "/industries-insights/:slug",
+        source: "/industries-insights/:slug",
+        destination: "/insights/:slug",
         permanent: true,
       },
     ];
