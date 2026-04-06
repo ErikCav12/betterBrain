@@ -2,227 +2,340 @@
 
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { ConsultationModal } from "@/components/ConsultationModal";
-import { useState } from "react";
+import { DualCTA } from "@/components/DualCTA";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import {
+  Search,
+  FileText,
+  Bot,
+  Mic,
+  MessageSquare,
+  BarChart3,
+  Check,
+  Clock,
+  Settings,
+  Users,
+} from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 
-const solutions = [
+/* ─── Data ─── */
+
+interface Accelerator {
+  id: string;
+  name: string;
+  label: string;
+  icon: LucideIcon;
+  description: string;
+  features: string[];
+}
+
+const accelerators: Accelerator[] = [
   {
-    id: "knowledge",
-    title: "Knowledge Unlocking",
-    subtitle: "Your entire organization's knowledge, instantly accessible",
+    id: "bettersearch",
+    name: "BetterSearch",
+    label: "Enterprise Knowledge Retrieval",
+    icon: Search,
     description:
-      "BetterBrain connects to your documents, databases, and communication channels to create a unified knowledge layer. Ask questions in natural language and get precise answers with citations traced back to original sources.",
+      "Find the right answer across millions of documents in seconds. BetterSearch connects to your existing data sources and delivers precise, cited answers.",
     features: [
-      "Cross-departmental knowledge retrieval",
-      "Source citation and traceability",
-      "Works with PDFs, spreadsheets, meeting notes, and more",
-      "Continuous learning from new documents",
+      "Cross-source search",
+      "Citation tracing",
+      "Real-time learning",
+      "Natural language queries",
     ],
   },
   {
-    id: "automations",
-    title: "Smart Automations",
-    subtitle: "Workflows that work the same way you do",
+    id: "betterdocs",
+    name: "BetterDocs",
+    label: "Document Intelligence",
+    icon: FileText,
     description:
-      "Custom-built automations that mirror your team's actual processes — not generic templates. From data extraction to report generation, BetterBrain automates the repetitive work so your team can focus on high-value decisions.",
+      "Automated document processing that handles contracts, invoices, compliance docs, and more. BetterDocs extracts, classifies, and structures data from any document type.",
     features: [
-      "Process-specific automation design",
-      "Multi-step workflow orchestration",
-      "Human-in-the-loop validation",
-      "Seamless handoffs between AI and team members",
+      "Contract review & analysis",
+      "OCR & data extraction",
+      "Compliance automation",
+      "Entity recognition",
     ],
   },
   {
-    id: "insights",
-    title: "Data Insights",
-    subtitle: "From raw data to clear decisions",
+    id: "betteragent",
+    name: "BetterAgent",
+    label: "Custom AI Agents",
+    icon: Bot,
     description:
-      "Automated analysis across both structured and unstructured data sources. BetterBrain surfaces trends, anomalies, and actionable intelligence that would take your team days to compile manually.",
+      "Context-aware agents that understand your business processes. BetterAgent automates support, research, and operations with agents that learn and adapt.",
     features: [
-      "Cross-source data analysis",
-      "Trend detection and anomaly flagging",
-      "Natural language querying",
-      "Automated reporting and dashboards",
+      "Multi-step workflow automation",
+      "Context-aware reasoning",
+      "Human-in-the-loop escalation",
+      "$200B agentic AI opportunity",
     ],
   },
   {
-    id: "ux",
-    title: "Intuitive UX",
-    subtitle: "Powerful AI, simple interface",
+    id: "bettervoice",
+    name: "BetterVoice",
+    label: "Voice Agent Automation",
+    icon: Mic,
     description:
-      "A clean, intuitive interface that anyone on your team can use — no training required. Or embed BetterBrain directly into your existing tools via our API and integrations.",
+      "AI-powered voice for inbound and outbound calls. BetterVoice handles call centre operations and captures frontline knowledge automatically.",
     features: [
-      "Standalone web application",
-      "API for custom integrations",
-      "Embed into existing frontends",
-      "Responsive design for any device",
+      "Inbound/outbound call AI",
+      "Voice-to-text capture",
+      "Sentiment analysis",
+      "Powered by ElevenLabs",
     ],
   },
   {
-    id: "accuracy",
-    title: "Accurate AI Answers",
-    subtitle: "Trust every answer",
+    id: "betterchat",
+    name: "BetterChat",
+    label: "Conversational AI & Chatbots",
+    icon: MessageSquare,
     description:
-      "BetterBrain uses advanced retrieval-augmented generation with built-in guardrails. Every answer is grounded in your data, with citations you can verify and confidence scores you can trust.",
+      "Natural language interfaces for customers and internal teams. BetterChat delivers contextual, accurate responses grounded in your data.",
     features: [
-      "Advanced RAG with source grounding",
-      "Bad-answer detection and filtering",
-      "Confidence scoring",
-      "Human validation loops for critical decisions",
+      "Customer-facing chatbots",
+      "Internal knowledge Q&A",
+      "Multi-channel deployment",
+      "Continuous learning",
     ],
   },
   {
-    id: "implementation",
-    title: "Quick Implementation",
-    subtitle: "Operational in days, not months",
+    id: "betterinsight",
+    name: "BetterInsight",
+    label: "Predictive Analytics & Forecasting",
+    icon: BarChart3,
     description:
-      "Our expert team handles everything — from data ingestion to deployment. Most clients are fully operational within days, with dedicated support throughout the process and beyond.",
+      "Turn historical data into forward-looking intelligence. BetterInsight surfaces trends, detects anomalies, and powers data-driven decisions.",
     features: [
-      "Dedicated implementation team",
-      "Pre-built connectors for popular tools",
-      "Iterative deployment with real-time feedback",
-      "Ongoing optimization and support",
+      "Trend detection",
+      "Anomaly flagging",
+      "Forecasting models",
+      "Natural language reporting",
     ],
   },
 ];
 
-const methodology = [
+interface EngagementStage {
+  number: string;
+  title: string;
+  timeline: string;
+  description: string;
+  icon: LucideIcon;
+}
+
+const engagementStages: EngagementStage[] = [
   {
-    step: "01",
-    title: "Discovery",
+    number: "01",
+    title: "AI Audit & Roadmap",
+    timeline: "1-2 weeks",
     description:
-      "We map your data landscape, identify high-value automation opportunities, and define success metrics.",
+      "Low-risk entry point. We map your data landscape, identify high-value opportunities, and deliver a prioritised roadmap with working prototypes.",
+    icon: Clock,
   },
   {
-    step: "02",
-    title: "Design",
+    number: "02",
+    title: "Build & Deploy",
+    timeline: "4-8 weeks",
     description:
-      "Custom solution architecture tailored to your workflows, data sources, and team structure.",
+      "Production-ready system built on BetterBrain's proprietary accelerators. Iterative development with continuous feedback loops.",
+    icon: Settings,
   },
   {
-    step: "03",
-    title: "Build",
+    number: "03",
+    title: "Managed AI Ops",
+    timeline: "Ongoing",
     description:
-      "Rapid development with continuous feedback loops. You see progress from day one.",
-  },
-  {
-    step: "04",
-    title: "Deploy",
-    description:
-      "Smooth rollout with comprehensive testing, training, and monitoring in place.",
-  },
-  {
-    step: "05",
-    title: "Evolve",
-    description:
-      "Continuous optimization based on usage patterns, new data sources, and evolving business needs.",
+      "Monitoring, retraining, optimisation, and governance. Monthly reporting and a named point of contact.",
+    icon: Users,
   },
 ];
+
+interface Capability {
+  title: string;
+  description: string;
+}
+
+const capabilities: Capability[] = [
+  {
+    title: "AI/ML Infrastructure",
+    description: "Scalable model serving and orchestration",
+  },
+  {
+    title: "RAG Pipelines",
+    description: "Retrieval-augmented generation at scale",
+  },
+  {
+    title: "Document Processing",
+    description: "Extraction, classification, and structuring",
+  },
+  {
+    title: "Data Structuring",
+    description: "Unstructured to structured data pipelines",
+  },
+  {
+    title: "Custom Search Systems",
+    description: "Semantic and hybrid search engines",
+  },
+  {
+    title: "Workflow Automation",
+    description: "Multi-step process orchestration",
+  },
+  {
+    title: "Entity Recognition",
+    description: "Named entity extraction and linking",
+  },
+  {
+    title: "Semantic Analysis",
+    description: "Meaning-aware text understanding",
+  },
+];
+
+/* ─── Page ─── */
 
 export default function SolutionsPage() {
-  const [modalOpen, setModalOpen] = useState(false);
-
   return (
     <>
+      {/* Hero */}
       <section className="pt-32 pb-16 px-6">
         <div className="max-w-5xl mx-auto text-center">
           <AnimatedHeadline
-            text="Solutions built for how you actually work"
+            text="Six accelerators. Proven across dozens of deployments."
             className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
           />
           <AnimatedSection animation="fade-up" delay={0.4}>
-            <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto">
-              Six core capabilities that transform how your team accesses,
-              analyzes, and acts on information.
+            <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto">
+              White-label AI products backed by proprietary infrastructure —
+              tested across businesses, ready to deploy in weeks.
             </p>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Solutions */}
+      {/* Accelerators Detail */}
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto space-y-24">
-          {solutions.map((solution, i) => (
-            <AnimatedSection
-              key={solution.id}
-              id={solution.id}
-              animation={i % 2 === 0 ? "slide-right" : "slide-left"}
-              className="scroll-mt-24"
-            >
-              <div
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                  i % 2 === 1 ? "lg:direction-rtl" : ""
-                }`}
+          {accelerators.map((acc, i) => {
+            const Icon = acc.icon;
+            const isEven = i % 2 === 0;
+
+            return (
+              <AnimatedSection
+                key={acc.id}
+                id={acc.id}
+                animation={isEven ? "slide-right" : "slide-left"}
+                className="scroll-mt-24"
               >
-                <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-                  <span className="text-accent text-sm font-semibold tracking-wider uppercase">
-                    {solution.title}
-                  </span>
-                  <h3 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
-                    {solution.subtitle}
-                  </h3>
-                  <p className="text-muted text-lg leading-relaxed mb-6">
-                    {solution.description}
-                  </p>
-                  <ul className="space-y-3">
-                    {solution.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-start gap-3 text-muted"
-                      >
-                        <svg
-                          className="w-5 h-5 text-accent mt-0.5 shrink-0"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                  {/* Text side */}
+                  <div className={isEven ? "" : "lg:order-2"}>
+                    <span className="text-accent text-sm font-semibold tracking-wider uppercase">
+                      {acc.label}
+                    </span>
+                    <h3 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
+                      {acc.name}
+                    </h3>
+                    <p className="text-muted text-lg leading-relaxed mb-6">
+                      {acc.description}
+                    </p>
+                    <ul className="space-y-3">
+                      {acc.features.map((feature) => (
+                        <li
+                          key={feature}
+                          className="flex items-start gap-3 text-muted"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                          <Check className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Image placeholder */}
+                  <div
+                    className={`bg-surface border border-border rounded-sm aspect-[4/3] flex items-center justify-center ${
+                      isEven ? "" : "lg:order-1"
+                    }`}
+                  >
+                    <Icon className="w-20 h-20 text-accent opacity-30" />
+                  </div>
                 </div>
-                <div
-                  className={`bg-surface border border-border rounded-2xl aspect-[4/3] flex items-center justify-center ${
-                    i % 2 === 1 ? "lg:order-1" : ""
-                  }`}
-                >
-                  <span className="text-6xl">{["🔓", "⚡", "📊", "✨", "🎯", "🚀"][i]}</span>
-                </div>
-              </div>
-            </AnimatedSection>
-          ))}
+              </AnimatedSection>
+            );
+          })}
         </div>
       </section>
 
-      {/* Methodology */}
-      <section className="py-24 px-6 bg-surface">
+      {/* Engagement Ladder */}
+      <section id="engagement" className="py-24 px-6 bg-surface">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Our methodology
-            </h2>
-            <p className="text-muted text-lg max-w-2xl mx-auto">
-              A proven process that gets you from zero to production, fast.
-            </p>
+          <AnimatedSection>
+            <SectionHeading
+              label="How We Work"
+              title="A clear path from audit to production"
+              centered
+            />
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            {methodology.map((step, i) => (
-              <AnimatedSection key={step.step} animation="fade-up" delay={i * 0.1}>
-                <div className="text-center">
-                  <span className="text-accent text-4xl font-bold">
-                    {step.step}
-                  </span>
-                  <h3 className="text-lg font-bold mt-3 mb-2">{step.title}</h3>
-                  <p className="text-muted text-sm leading-relaxed">
-                    {step.description}
+          <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10">
+            {/* Connecting line (desktop only) */}
+            <div className="hidden md:block absolute top-14 left-[16.67%] right-[16.67%] h-px bg-border" />
+
+            {engagementStages.map((stage, i) => {
+              const StageIcon = stage.icon;
+              return (
+                <AnimatedSection
+                  key={stage.number}
+                  animation="fade-up"
+                  delay={i * 0.15}
+                >
+                  <div className="relative text-center">
+                    {/* Numbered circle */}
+                    <div className="relative z-10 w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center text-lg font-bold mx-auto mb-4">
+                      {stage.number}
+                    </div>
+
+                    {/* Timeline badge */}
+                    <span className="inline-block text-xs font-semibold tracking-wider uppercase text-accent-light bg-accent/10 px-3 py-1 rounded-sm mb-4">
+                      {stage.timeline}
+                    </span>
+
+                    <div className="flex items-center justify-center gap-2 mb-3">
+                      <StageIcon className="w-5 h-5 text-accent" />
+                      <h3 className="text-xl font-bold">{stage.title}</h3>
+                    </div>
+
+                    <p className="text-muted text-sm leading-relaxed max-w-xs mx-auto">
+                      {stage.description}
+                    </p>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection>
+            <SectionHeading
+              label="The IP Behind the Accelerators"
+              title="Deep technical capabilities"
+              centered
+            />
+          </AnimatedSection>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {capabilities.map((cap, i) => (
+              <AnimatedSection key={cap.title} animation="fade-up" delay={i * 0.05}>
+                <div className="card-flip bg-surface border border-border rounded-sm p-5">
+                  <h4 className="font-semibold text-foreground mb-1 text-sm">
+                    {cap.title}
+                  </h4>
+                  <p className="text-muted text-xs leading-relaxed">
+                    {cap.description}
                   </p>
                 </div>
               </AnimatedSection>
@@ -231,24 +344,17 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Dual CTA */}
       <section className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Ready to see what BetterBrain can do?
+            <h2 className="text-3xl md:text-5xl font-bold mb-8">
+              Ready to see what BetterBrain can do for you?
             </h2>
-            <button
-              onClick={() => setModalOpen(true)}
-              className="bg-accent hover:bg-accent/80 text-white px-10 py-4 rounded-lg text-lg font-medium transition-all hover:shadow-lg hover:shadow-accent/25"
-            >
-              Request a Consultation
-            </button>
+            <DualCTA />
           </AnimatedSection>
         </div>
       </section>
-
-      <ConsultationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }

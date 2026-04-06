@@ -2,170 +2,286 @@
 
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { ConsultationModal } from "@/components/ConsultationModal";
-import { useState } from "react";
-import Link from "next/link";
+import { DualCTA } from "@/components/DualCTA";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Button } from "@/components/ui/Button";
+import {
+  Search,
+  FileText,
+  Bot,
+  Mic,
+  MessageSquare,
+  BarChart3,
+  Zap,
+  Layers,
+  ArrowRight,
+  Cpu,
+  Calendar,
+  ClipboardCheck,
+} from "lucide-react";
 
-const capabilities = [
+/* ------------------------------------------------------------------ */
+/*  Data                                                               */
+/* ------------------------------------------------------------------ */
+
+const differentiators = [
   {
-    title: "Knowledge Unlocking",
+    icon: Cpu,
+    title: "Proprietary IP",
     description:
-      "Cross-organizational insight gathering from unstructured data — PDFs, spreadsheets, meeting notes, and more.",
-    icon: "🔓",
+      "Pre-built accelerators backed by years of R&D. This is why we deliver in weeks while others take months.",
   },
   {
-    title: "Smart Automations",
+    icon: Layers,
+    title: "Stack-Agnostic",
     description:
-      "Custom-built automations aligned to your specific business processes, not generic workflows.",
-    icon: "⚡",
+      "Works across AWS, GCP, Azure. No vendor lock-in. Maximum flexibility for your infrastructure.",
   },
   {
-    title: "Data Insights",
+    icon: Zap,
+    title: "Full-Stack Delivery",
     description:
-      "Automated analysis across structured and unstructured data sources, delivering actionable intelligence.",
-    icon: "📊",
-  },
-  {
-    title: "Intuitive UX",
-    description:
-      "Easy-to-use standalone interface or seamless integration into your existing tools and frontends.",
-    icon: "✨",
-  },
-  {
-    title: "Accurate AI Answers",
-    description:
-      "Advanced retrieval with citation tracing, bad-answer detection, and human validation loops.",
-    icon: "🎯",
-  },
-  {
-    title: "Quick Implementation",
-    description:
-      "Operational within days, not months. Expert-built integrations tailored to your stack.",
-    icon: "🚀",
+      "From the data layer to the application layer and everything between. Infrastructure to UI.",
   },
 ];
 
-const integrations = [
-  "Google Drive",
-  "Slack",
-  "Notion",
-  "Salesforce",
-  "Excel",
-  "Affinity",
-  "PDF",
-  "Databases",
+const lifecycleSteps = [
+  {
+    number: "01",
+    title: "Discovery",
+    description: "Understand your data, workflows, and business goals.",
+  },
+  {
+    number: "02",
+    title: "Strategy",
+    description: "Map AI opportunities to measurable outcomes.",
+  },
+  {
+    number: "03",
+    title: "Build",
+    description: "Develop with proprietary accelerators and proven patterns.",
+  },
+  {
+    number: "04",
+    title: "Deploy",
+    description: "Ship to production with monitoring and guardrails.",
+  },
+  {
+    number: "05",
+    title: "Adopt",
+    description: "Drive user adoption with training and change management.",
+  },
+  {
+    number: "06",
+    title: "Optimise",
+    description: "Continuously improve with feedback loops and analytics.",
+  },
+];
+
+const accelerators = [
+  {
+    icon: Search,
+    name: "BetterSearch",
+    subtitle: "Enterprise knowledge retrieval",
+    description:
+      "Find the right answer across millions of documents in seconds.",
+    features: [
+      "Semantic search across all data sources",
+      "Citation tracing and source verification",
+      "Role-based access controls",
+    ],
+  },
+  {
+    icon: FileText,
+    name: "BetterDocs",
+    subtitle: "Document intelligence",
+    description:
+      "Contract review, invoice processing, compliance automation.",
+    features: [
+      "Automated document classification",
+      "Key clause and field extraction",
+      "Compliance and audit workflows",
+    ],
+  },
+  {
+    icon: Bot,
+    name: "BetterAgent",
+    subtitle: "Custom AI agents",
+    description:
+      "Context-aware agents for support, research, and operations.",
+    features: [
+      "Multi-step reasoning and tool use",
+      "Human-in-the-loop escalation",
+      "Integration with internal systems",
+    ],
+  },
+  {
+    icon: Mic,
+    name: "BetterVoice",
+    subtitle: "Voice agent automation",
+    description: "Inbound/outbound call centre AI, voice capture.",
+    features: [
+      "Real-time transcription and intent detection",
+      "Automated call routing and triage",
+      "Post-call summaries and action items",
+    ],
+  },
+  {
+    icon: MessageSquare,
+    name: "BetterChat",
+    subtitle: "Conversational AI & chatbots",
+    description:
+      "Natural language interfaces for customers and teams.",
+    features: [
+      "Omnichannel deployment (web, Slack, Teams)",
+      "Context-aware multi-turn conversations",
+      "Handoff to human agents when needed",
+    ],
+  },
+  {
+    icon: BarChart3,
+    name: "BetterInsight",
+    subtitle: "Predictive analytics",
+    description:
+      "Forecasting, trend detection, and data-driven decisions.",
+    features: [
+      "Time-series forecasting and anomaly detection",
+      "Natural language querying over dashboards",
+      "Automated reporting and alerts",
+    ],
+  },
+];
+
+const marketStats = [
+  {
+    stat: "91%",
+    description: "of mid-market companies have adopted AI",
+    source: "RSM 2025",
+  },
+  {
+    stat: "53%",
+    description: "feel only 'somewhat prepared' to implement",
+    source: "RSM 2025",
+  },
+  {
+    stat: "76%",
+    description: "prefer to buy AI rather than build it",
+    source: "RSM 2025",
+  },
+  {
+    stat: "67%",
+    description: "stuck in pilot purgatory",
+    source: "Industry surveys",
+  },
+];
+
+const proofMetrics = [
+  { value: "15hrs", label: "saved/employee/week" },
+  { value: "90%", label: "reduction in data requests" },
+  { value: "3x", label: "faster project completion" },
 ];
 
 const testimonials = [
   {
     quote:
-      "BetterBrain helped us close ~$1M in revenue in just a few months. It's our core asset now.",
-    author: "Head of Growth",
-    company: "10-person agency",
+      "I run an outbound agency that sends hundreds of thousands of emails a month, and the core asset of the agency, the single thing that has allowed us to close >$600k in top line revenue in the last 6 months is instant access to great data and BetterBrain.",
+    name: "Jordan Crawford",
+    title: "CEO",
+    company: "Blueprint",
+    initials: "JC",
   },
   {
     quote:
-      "We save 20+ hours per week. Our sales performance has been boosted dramatically — it's a game-changer.",
-    author: "Head of Operations",
-    company: "Enterprise client",
+      "The real problem is all the information that's locked up in people's brains... BetterBrain is able to significantly reduce the time it takes to answer ad hoc data requests.",
+    name: "Harshita Girase",
+    title: "Analytics Engineer",
+    company: "Sigma Computing",
+    initials: "HG",
   },
   {
     quote:
-      "The speed of implementation was remarkable. We were operational within days, not the months we expected.",
-    author: "VP of Data",
-    company: "Financial services firm",
+      "To efficiently service all of our clients with a small team, we need to store, manage, and analyze a range of data... BetterBrain saves us 20+ hours a week.",
+    name: "Benjamin Kinsella",
+    title: "Product & GM",
+    company: "Tribe AI",
+    initials: "BK",
+  },
+  {
+    quote:
+      "Our stakeholders are asking a lot of questions that we on the data team don't have the bandwidth to answer... BetterBrain's product can help us learn our company's hidden tribal knowledge.",
+    name: "Sanjay Thapa",
+    title: "Salesforce Administrator",
+    company: "Endeavor",
+    initials: "ST",
   },
 ];
 
-export default function Home() {
-  const [modalOpen, setModalOpen] = useState(false);
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
 
+export default function Home() {
   return (
     <>
-      {/* Hero */}
+      {/* ── 1. Hero ─────────────────────────────────────────────── */}
       <section className="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-accent/10 via-background to-background" />
-        <div className="relative max-w-5xl mx-auto text-center">
-          <AnimatedSection animation="fade-in" delay={0}>
-            <span className="inline-flex items-center gap-2 border border-border rounded-full px-5 py-2 text-sm text-muted mb-8">
-              Introducing BetterBrain
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </span>
-          </AnimatedSection>
 
+        <div className="relative max-w-5xl mx-auto text-center">
           <AnimatedHeadline
-            text="Intelligent workflow automation that understands your business"
+            text="Production AI in weeks, not months"
             className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-8"
+            tag="h1"
           />
 
           <AnimatedSection animation="fade-up" delay={0.6}>
             <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
-              Our customized, secure, and context-aware AI solutions make{" "}
-              <strong className="text-foreground">advanced insights</strong> from
-              across your business instantly{" "}
-              <strong className="text-foreground">accessible</strong> and{" "}
-              <strong className="text-foreground">actionable</strong>.
+              Proprietary accelerators. Proven across dozens of deployments.
+              Stack-agnostic. No vendor lock-in.
             </p>
           </AnimatedSection>
 
           <AnimatedSection animation="fade-up" delay={0.8}>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/solutions"
-                className="border border-border hover:border-accent/50 text-foreground px-8 py-3.5 rounded-lg font-medium transition-all hover:bg-surface text-center"
+              <Button
+                href="/contact"
+                variant="primary"
+                size="lg"
+                icon={<Calendar className="w-5 h-5" />}
               >
-                Learn More
-              </Link>
-              <button
-                onClick={() => setModalOpen(true)}
-                className="bg-accent hover:bg-accent/80 text-white px-8 py-3.5 rounded-lg font-medium transition-all hover:shadow-lg hover:shadow-accent/25"
+                Book a Discovery Workshop
+              </Button>
+              <Button
+                href="/contact#assessment"
+                variant="secondary"
+                size="lg"
+                icon={<ClipboardCheck className="w-5 h-5" />}
               >
-                Get Started
-              </button>
+                AI Readiness Assessment
+              </Button>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Capabilities */}
+      {/* ── 2. Three Differentiators ────────────────────────────── */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Everything you need, nothing you don&apos;t
-            </h2>
-            <p className="text-muted text-lg max-w-2xl mx-auto">
-              Six core capabilities designed to transform how your team accesses
-              and acts on information.
-            </p>
+          <AnimatedSection>
+            <SectionHeading
+              label="Why BetterBrain"
+              title="Three reasons we deliver faster"
+            />
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {capabilities.map((cap, i) => (
-              <AnimatedSection
-                key={cap.title}
-                animation="fade-up"
-                delay={i * 0.1}
-              >
-                <div className="bg-surface border border-border rounded-2xl p-8 hover:border-accent/30 transition-all group h-full">
-                  <span className="text-3xl mb-4 block">{cap.icon}</span>
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-accent-light transition-colors">
-                    {cap.title}
-                  </h3>
-                  <p className="text-muted leading-relaxed">
-                    {cap.description}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {differentiators.map((d, i) => (
+              <AnimatedSection key={d.title} animation="fade-up" delay={i * 0.1}>
+                <div className="card-flip bg-surface border border-border rounded-sm p-8 h-full">
+                  <d.icon className="card-flip-icon w-8 h-8 text-accent mb-5" />
+                  <h3 className="text-xl font-bold mb-3">{d.title}</h3>
+                  <p className="card-flip-muted text-muted leading-relaxed">
+                    {d.description}
                   </p>
                 </div>
               </AnimatedSection>
@@ -174,26 +290,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Integrations */}
+      {/* ── 3. Lifecycle Journey ────────────────────────────────── */}
       <section className="py-24 px-6 bg-surface">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Connects to your stack
-            </h2>
-            <p className="text-muted text-lg max-w-2xl mx-auto">
-              One-click integrations with the tools your team already uses.
-            </p>
+          <AnimatedSection>
+            <SectionHeading
+              label="End-to-End"
+              title="From discovery to adoption"
+            />
           </AnimatedSection>
 
-          <AnimatedSection animation="fade-up">
-            <div className="flex flex-wrap justify-center gap-4">
-              {integrations.map((name) => (
-                <div
-                  key={name}
-                  className="bg-background border border-border rounded-xl px-6 py-4 text-sm font-medium hover:border-accent/30 transition-all"
-                >
-                  {name}
+          <AnimatedSection animation="fade-up" delay={0.2}>
+            <div className="flex flex-wrap lg:flex-nowrap items-start justify-center gap-0">
+              {lifecycleSteps.map((step, i) => (
+                <div key={step.title} className="flex items-start">
+                  <div className="flex flex-col items-center text-center w-40 shrink-0">
+                    <div className="w-12 h-12 rounded-sm bg-accent/10 border border-accent/30 flex items-center justify-center text-accent font-bold text-sm mb-3">
+                      {step.number}
+                    </div>
+                    <h3 className="text-lg font-bold mb-1">{step.title}</h3>
+                    <p className="text-muted text-sm leading-relaxed px-2">
+                      {step.description}
+                    </p>
+                  </div>
+
+                  {i < lifecycleSteps.length - 1 && (
+                    <div className="hidden lg:flex items-center pt-5 px-1">
+                      <div className="w-8 h-px bg-accent/30" />
+                      <ArrowRight className="w-4 h-4 text-accent/50 shrink-0" />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -201,30 +327,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Social Proof */}
+      {/* ── 4. Accelerators ─────────────────────────────────────── */}
       <section className="py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Trusted by teams that move fast
-            </h2>
+          <AnimatedSection>
+            <SectionHeading
+              label="Our Accelerators"
+              title="Battle-tested AI products, ready to deploy"
+              subtitle="White-label accelerators tested across dozens of businesses. Spin up in weeks, not months."
+            />
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <AnimatedSection
-                key={i}
-                animation="fade-up"
-                delay={i * 0.15}
-              >
-                <div className="bg-surface border border-border rounded-2xl p-8 h-full flex flex-col">
-                  <p className="text-lg leading-relaxed mb-6 flex-1">
-                    &ldquo;{t.quote}&rdquo;
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {accelerators.map((a, i) => (
+              <AnimatedSection key={a.name} animation="fade-up" delay={i * 0.1}>
+                <div className="card-flip bg-surface border border-border rounded-sm p-8 h-full flex flex-col">
+                  <a.icon className="card-flip-icon w-8 h-8 text-accent mb-4" />
+                  <h3 className="text-xl font-bold mb-1">{a.name}</h3>
+                  <p className="card-flip-muted text-muted text-sm mb-3">
+                    {a.subtitle}
                   </p>
-                  <div>
-                    <p className="font-semibold">{t.author}</p>
-                    <p className="text-muted text-sm">{t.company}</p>
-                  </div>
+                  <p className="text-foreground/80 text-sm leading-relaxed mb-4">
+                    {a.description}
+                  </p>
+                  <ul className="mt-auto space-y-2">
+                    {a.features.map((f) => (
+                      <li
+                        key={f}
+                        className="card-flip-muted flex items-start gap-2 text-muted text-sm"
+                      >
+                        <span className="mt-0.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </AnimatedSection>
             ))}
@@ -232,33 +368,109 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Compliance badge */}
-      <section className="py-16 px-6 bg-surface">
-        <AnimatedSection className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-3 border border-border rounded-full px-6 py-3">
-            <svg
-              className="w-5 h-5 text-accent"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-              />
-            </svg>
-            <span className="text-sm font-medium">SOC 2 Type 2 Certified</span>
+      {/* ── 5. Market Stats ─────────────────────────────────────── */}
+      <section className="py-24 px-6 bg-surface">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection>
+            <SectionHeading
+              label="Why Now"
+              title="The AI gap is your opportunity"
+            />
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {marketStats.map((s, i) => (
+              <AnimatedSection key={s.stat} animation="fade-up" delay={i * 0.1}>
+                <div className="bg-background border border-border rounded-sm p-8 text-center">
+                  <p className="text-5xl font-bold text-accent mb-3">
+                    {s.stat}
+                  </p>
+                  <p className="text-muted leading-relaxed mb-4">
+                    {s.description}
+                  </p>
+                  <p className="text-muted/60 text-xs uppercase tracking-wider">
+                    Source: {s.source}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
-          <p className="text-muted text-sm mt-4 max-w-lg mx-auto">
-            Enterprise-grade security across availability, processing integrity,
-            confidentiality, and privacy.
-          </p>
-        </AnimatedSection>
+        </div>
       </section>
 
-      {/* CTA */}
+      {/* ── 6. Social Proof ─────────────────────────────────────── */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection>
+            <SectionHeading
+              label="Proven Results"
+              title="Our customers love BetterBrain"
+            />
+          </AnimatedSection>
+
+          {/* Metrics row */}
+          <AnimatedSection animation="fade-up" delay={0.1}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+              {proofMetrics.map((m) => (
+                <div
+                  key={m.value}
+                  className="bg-surface border border-border rounded-sm p-8 text-center"
+                >
+                  <p className="text-4xl font-bold text-accent mb-2">
+                    {m.value}
+                  </p>
+                  <p className="text-muted">{m.label}</p>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          {/* Testimonials */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            {testimonials.map((t, i) => (
+              <AnimatedSection key={t.name} animation="fade-up" delay={i * 0.1}>
+                <div className="bg-surface border border-border rounded-sm p-8 h-full flex flex-col">
+                  <p className="text-foreground/90 leading-relaxed mb-6 flex-1">
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-accent/20 border border-accent/30 flex items-center justify-center text-accent text-sm font-bold shrink-0">
+                      {t.initials}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm">{t.name}</p>
+                      <p className="text-muted text-sm">
+                        {t.title} @ {t.company}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* Credentials */}
+          <AnimatedSection animation="fade-in" delay={0.3}>
+            <div className="text-center space-y-3">
+              <p className="text-muted text-sm">
+                Team from{" "}
+                <span className="text-foreground/80 font-medium">
+                  Carnegie Mellon, Stanford, Berkeley, Y Combinator, MITRE, PwC,
+                  CapSen Robotics
+                </span>
+              </p>
+              <p className="text-muted text-sm">
+                Backed by individuals from{" "}
+                <span className="text-foreground/80 font-medium">
+                  OpenAI, Samsung Next, Hustle Fund, Snowflake
+                </span>
+              </p>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ── 7. Dual CTA ─────────────────────────────────────────── */}
       <section className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <AnimatedSection>
@@ -268,20 +480,13 @@ export default function Home() {
             <p className="text-2xl md:text-3xl text-muted mb-10">
               Ask us about yours.
             </p>
-            <button
-              onClick={() => setModalOpen(true)}
-              className="bg-accent hover:bg-accent/80 text-white px-10 py-4 rounded-lg text-lg font-medium transition-all hover:shadow-lg hover:shadow-accent/25"
-            >
-              Get Started
-            </button>
+          </AnimatedSection>
+
+          <AnimatedSection animation="fade-up" delay={0.2}>
+            <DualCTA />
           </AnimatedSection>
         </div>
       </section>
-
-      <ConsultationModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-      />
     </>
   );
 }

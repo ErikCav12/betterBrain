@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
-const inter = Inter({
-  variable: "--font-geist-sans",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
-  title: "BetterBrain — Intelligent Workflow Automation",
+  title: "BetterBrain — Production AI in Weeks, Not Months",
   description:
-    "Customized, secure, and context-aware AI solutions that make advanced insights from across your business instantly accessible and actionable.",
+    "Specialist mid-market AI partner with proprietary accelerators. Stack-agnostic, full-stack delivery from discovery to adoption.",
 };
 
 export default function RootLayout({
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${spaceGrotesk.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Navigation />
         <main className="flex-1">{children}</main>

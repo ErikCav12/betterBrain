@@ -2,90 +2,93 @@
 
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import Link from "next/link";
-
-const values = [
-  {
-    title: "Depth Over Breadth",
-    description:
-      "We go deep on every engagement. No cookie-cutter solutions — every implementation is designed for the specific nuances of your data, processes, and team.",
-  },
-  {
-    title: "Production or Nothing",
-    description:
-      "Prototypes are easy. Production systems that deliver value day after day are hard. We don't consider an engagement successful until it's running reliably in production.",
-  },
-  {
-    title: "Radical Transparency",
-    description:
-      "We'll tell you when AI isn't the right solution. We'll tell you when a simpler approach will work better. Our job is to solve your problem, not sell you technology.",
-  },
-];
+import { DualCTA } from "@/components/DualCTA";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Cpu, Layers, Zap, Shield, Lock, Eye, Check, Users } from "lucide-react";
 
 const stats = [
   { value: "100%", label: "Projects in production or on track" },
-  { value: "Days", label: "Average time to first deployment" },
+  { value: "Weeks", label: "Average time to first deployment" },
   { value: "SOC 2", label: "Type 2 certified" },
   { value: "24hr", label: "Response time guarantee" },
 ];
 
+const differentiators = [
+  {
+    icon: Cpu,
+    title: "Proprietary IP",
+    description:
+      "Years of R&D baked into pre-built accelerators. You get production AI in weeks because we've already solved the hard infrastructure problems.",
+  },
+  {
+    icon: Layers,
+    title: "Stack-agnostic",
+    description:
+      "We work with your existing tools and platforms. No vendor lock-in, no rip-and-replace — just AI that fits into what you already have.",
+  },
+  {
+    icon: Zap,
+    title: "Full-stack delivery",
+    description:
+      "From strategy through deployment and ongoing support. One team, one engagement, one accountable partner for the entire lifecycle.",
+  },
+];
+
+const teamMembers = [
+  { name: "Team Member", role: "Role Title", bio: "Background in AI/ML research and enterprise software delivery." },
+  { name: "Team Member", role: "Role Title", bio: "Experience building and scaling AI products from zero to millions of users." },
+  { name: "Team Member", role: "Role Title", bio: "Deep expertise in data infrastructure, MLOps, and production systems." },
+];
+
+const securityCards = [
+  { icon: Shield, title: "SOC 2 Type 2", description: "Independently audited controls for security, availability, and confidentiality." },
+  { icon: Lock, title: "Data Encryption", description: "End-to-end encryption at rest and in transit across every engagement." },
+  { icon: Eye, title: "Access Controls", description: "Role-based permissions and audit logging for every system we build." },
+  { icon: Check, title: "AI Governance", description: "Bias testing, model monitoring, and explainability baked into every deployment." },
+];
+
 export default function AboutPage() {
   return (
-    <>
-      <section className="pt-32 pb-16 px-6">
-        <div className="max-w-5xl mx-auto text-center">
+    <main className="bg-background text-foreground">
+      {/* Hero */}
+      <section className="pt-32 pb-16 max-w-5xl mx-auto px-6">
+        <AnimatedSection animation="fade-up">
           <AnimatedHeadline
-            text="We build AI that actually works"
-            className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
+            text="We build AI that ships"
+            tag="h1"
+            className="text-4xl md:text-6xl font-bold tracking-tight"
           />
-          <AnimatedSection animation="fade-up" delay={0.4}>
-            <p className="text-lg md:text-xl text-muted max-w-3xl mx-auto leading-relaxed">
-              BetterBrain was founded on a simple premise: enterprise AI should
-              be customized, contextual, and production-ready from day one. We&apos;re
-              a team of AI engineers, data scientists, and product builders
-              obsessed with delivering real results.
-            </p>
-          </AnimatedSection>
-        </div>
+        </AnimatedSection>
       </section>
 
       {/* Mission */}
-      <section className="py-24 px-6 bg-surface">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <AnimatedSection animation="slide-right">
-              <span className="text-accent text-sm font-semibold tracking-wider uppercase">
-                Our Mission
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-6">
-                Make advanced insights instantly accessible and actionable
-              </h2>
-              <p className="text-muted text-lg leading-relaxed mb-4">
-                Every organization sits on a goldmine of data — in documents,
-                databases, communication channels, and the collective expertise
-                of its people. The problem isn&apos;t lack of information; it&apos;s that
-                the right information is never where you need it, when you need
-                it.
+      <section className="py-24 bg-surface">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <AnimatedSection animation="fade-up">
+              <SectionHeading label="Our Mission" title="" centered={false} />
+              <p className="text-lg text-muted mt-4 leading-relaxed">
+                BetterBrain was founded on a simple premise: mid-market companies
+                deserve the same AI capabilities as the Fortune 500 — without the
+                Fortune 500 price tag or timeline.
               </p>
-              <p className="text-muted text-lg leading-relaxed">
-                BetterBrain bridges that gap. We build customized AI solutions
-                that understand your business context, connect to your data
-                sources, and deliver trusted answers with full traceability — so
-                your team can spend less time searching and more time deciding.
+              <p className="text-lg text-muted mt-6 leading-relaxed">
+                We&apos;ve built proprietary AI infrastructure — years of R&amp;D baked
+                into every engagement. Pre-built accelerators for search, documents,
+                agents, voice, chat, and analytics mean we deliver production AI in
+                weeks, not months.
               </p>
             </AnimatedSection>
 
-            <AnimatedSection animation="slide-left">
-              <div className="grid grid-cols-2 gap-6">
+            <AnimatedSection animation="fade-up" delay={200}>
+              <div className="grid grid-cols-2 gap-4">
                 {stats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="bg-background border border-border rounded-2xl p-8 text-center"
+                    className="card-flip rounded-sm border border-border p-6 text-center"
                   >
-                    <span className="text-3xl font-bold text-accent">
-                      {stat.value}
-                    </span>
-                    <p className="text-muted text-sm mt-2">{stat.label}</p>
+                    <p className="text-3xl font-bold text-accent">{stat.value}</p>
+                    <p className="text-sm text-muted mt-2">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -94,27 +97,25 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              What we believe
-            </h2>
+      {/* Three Differentiators */}
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <AnimatedSection animation="fade-up">
+            <SectionHeading
+              label="Why BetterBrain"
+              title="What makes us different"
+              centered
+            />
           </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {values.map((value, i) => (
-              <AnimatedSection
-                key={value.title}
-                animation="fade-up"
-                delay={i * 0.15}
-              >
-                <div className="bg-surface border border-border rounded-2xl p-8 h-full">
-                  <h3 className="text-xl font-bold mb-4">{value.title}</h3>
-                  <p className="text-muted leading-relaxed">
-                    {value.description}
-                  </p>
+          <div className="grid md:grid-cols-3 gap-8 mt-16">
+            {differentiators.map((item, i) => (
+              <AnimatedSection key={item.title} animation="fade-up" delay={i * 150}>
+                <div className="card-flip rounded-sm border border-border p-8">
+                  <div className="card-flip-icon w-12 h-12 rounded-sm bg-accent/10 flex items-center justify-center mb-6">
+                    <item.icon className="w-6 h-6 text-accent" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                  <p className="text-muted leading-relaxed">{item.description}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -123,132 +124,92 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-24 px-6 bg-surface">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Built by practitioners
-            </h2>
-            <p className="text-muted text-lg max-w-2xl mx-auto">
-              Our team combines deep AI engineering expertise with real-world
-              business experience. We&apos;ve built and deployed AI systems at scale
-              across industries.
-            </p>
+      <section className="py-24 bg-surface">
+        <div className="max-w-6xl mx-auto px-6">
+          <AnimatedSection animation="fade-up">
+            <SectionHeading
+              label="The Team"
+              title="Built by practitioners"
+              subtitle="Our team brings deep technical expertise from Carnegie Mellon, Stanford, Berkeley, and years of shipping AI systems at scale."
+              centered
+            />
           </AnimatedSection>
 
-          <AnimatedSection animation="fade-up">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div
-                  key={i}
-                  className="bg-background border border-border rounded-2xl p-8 text-center"
-                >
-                  <div className="w-24 h-24 bg-surface-light border border-border rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <svg
-                      className="w-10 h-10 text-muted"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
+          <div className="grid md:grid-cols-3 gap-8 mt-16">
+            {teamMembers.map((member, i) => (
+              <AnimatedSection key={i} animation="fade-up" delay={i * 150}>
+                <div className="card-flip-muted rounded-sm border border-border p-8 text-center">
+                  <div className="w-24 h-24 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
+                    <Users className="w-10 h-10 text-accent" />
                   </div>
-                  <h3 className="text-lg font-bold">Team Member</h3>
-                  <p className="text-accent text-sm">Role Title</p>
-                  <p className="text-muted text-sm mt-3">
-                    Background and expertise placeholder. Replace with actual
-                    team member details.
-                  </p>
+                  <h3 className="text-lg font-semibold">{member.name}</h3>
+                  <p className="text-sm text-accent-light mt-1">{member.role}</p>
+                  <p className="text-sm text-muted mt-3">{member.bio}</p>
                 </div>
-              ))}
-            </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection animation="fade-up" delay={500}>
+            <p className="text-center text-muted mt-12 text-lg">
+              Backed by individuals from{" "}
+              <span className="text-foreground font-medium">OpenAI</span>,{" "}
+              <span className="text-foreground font-medium">Samsung Next</span>,{" "}
+              <span className="text-foreground font-medium">Hustle Fund</span>, and{" "}
+              <span className="text-foreground font-medium">Snowflake</span>.
+            </p>
           </AnimatedSection>
         </div>
       </section>
 
       {/* Security */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              Enterprise-grade security
-            </h2>
-            <p className="text-muted text-lg max-w-2xl mx-auto">
-              Your data is your most valuable asset. We treat it that way.
-            </p>
+      <section className="py-24">
+        <div className="max-w-6xl mx-auto px-6">
+          <AnimatedSection animation="fade-up">
+            <SectionHeading
+              label="Security"
+              title="Enterprise-grade security"
+              subtitle="Your data and your customers' data are treated with the highest standard of care at every layer."
+              centered
+            />
           </AnimatedSection>
 
-          <AnimatedSection animation="fade-up">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[
-                {
-                  title: "SOC 2 Type 2",
-                  desc: "Independently audited security controls",
-                },
-                {
-                  title: "Data Encryption",
-                  desc: "End-to-end encryption at rest and in transit",
-                },
-                {
-                  title: "Access Controls",
-                  desc: "Role-based access with audit logging",
-                },
-                {
-                  title: "Data Residency",
-                  desc: "Your data stays in your preferred region",
-                },
-              ].map((item) => (
-                <div
-                  key={item.title}
-                  className="bg-surface border border-border rounded-2xl p-6 text-center"
-                >
-                  <svg
-                    className="w-8 h-8 text-accent mx-auto mb-3"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                    />
-                  </svg>
-                  <h3 className="font-bold mb-1">{item.title}</h3>
-                  <p className="text-muted text-sm">{item.desc}</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+            {securityCards.map((card, i) => (
+              <AnimatedSection key={card.title} animation="fade-up" delay={i * 100}>
+                <div className="card-flip rounded-sm border border-border p-6">
+                  <div className="card-flip-icon w-10 h-10 rounded-sm bg-accent/10 flex items-center justify-center mb-4">
+                    <card.icon className="w-5 h-5 text-accent" />
+                  </div>
+                  <h3 className="font-semibold mb-2">{card.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">
+                    {card.description}
+                  </p>
                 </div>
-              ))}
-            </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection animation="fade-in" delay={500}>
+            <p className="text-center text-muted mt-12 text-lg">
+              <span className="text-accent font-semibold">78%</span> of enterprises
+              prioritise ethical AI when selecting consultants.
+            </p>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-32 px-6 bg-surface">
-        <div className="max-w-4xl mx-auto text-center">
-          <AnimatedSection>
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+      {/* Dual CTA */}
+      <section className="py-32 bg-surface">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <AnimatedSection animation="fade-up">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8">
               Ready to work together?
             </h2>
-            <p className="text-muted text-lg mb-10 max-w-2xl mx-auto">
-              We&apos;d love to learn about your use case and show you what
-              BetterBrain can do.
-            </p>
-            <Link
-              href="/get-started"
-              className="inline-block bg-accent hover:bg-accent/80 text-white px-10 py-4 rounded-lg text-lg font-medium transition-all hover:shadow-lg hover:shadow-accent/25"
-            >
-              Get Started
-            </Link>
+            <DualCTA />
           </AnimatedSection>
         </div>
       </section>
-    </>
+    </main>
   );
 }

@@ -1,4 +1,6 @@
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { DualCTA } from "@/components/DualCTA";
+import { ArrowLeft, Check } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -9,7 +11,7 @@ const caseStudyData: Record<
     title: string;
     metric: string;
     metricLabel: string;
-    challenge: string;
+    problem: string;
     solution: string;
     results: string[];
     tags: string[];
@@ -17,105 +19,105 @@ const caseStudyData: Record<
 > = {
   "agency-revenue-growth": {
     category: "Sales",
-    title: "How a 10-person agency closed ~$1M using BetterBrain",
-    metric: "~$1M",
-    metricLabel: "Revenue closed in months",
-    challenge:
-      "A boutique agency struggled with manual prospect research, inconsistent outreach, and siloed deal intelligence. Their small team couldn't scale their sales process without significant headcount.",
+    title: "How a 10-person agency closed >$600K in 6 months",
+    metric: ">$600K",
+    metricLabel: "Revenue closed in 6 months",
+    problem:
+      "A boutique outbound agency was spending hours on manual prospect research for every campaign. Data access was the bottleneck — the team couldn't differentiate at scale without better intelligence.",
     solution:
-      "BetterBrain was deployed to automate prospect research, generate personalized outreach at scale, and surface deal insights from CRM data, emails, and meeting notes. The platform became the central intelligence layer for their entire sales operation.",
+      "BetterBrain was deployed as the agency's core data asset. It connected to all existing data sources, enabled instant natural language querying, and automated prospect research that previously took hours per batch.",
     results: [
-      "~$1M in new revenue closed within months of deployment",
-      "Sales cycle shortened by 40%",
-      "Prospect research time reduced from hours to minutes",
-      "BetterBrain became the team's self-described 'core asset'",
+      ">$600K in top-line revenue closed in 6 months",
+      "Prospect research reduced from hours to minutes",
+      "BetterBrain became the agency's self-described 'core asset'",
+      "Hundreds of thousands of personalised emails powered by better data access",
     ],
-    tags: ["Outbound Sales", "Knowledge Retrieval", "Automations"],
+    tags: ["Outbound Sales", "Data Access", "Revenue Growth"],
   },
   "operations-time-savings": {
     category: "Operations",
-    title: "Saving 20+ hours per week for a Head of Operations",
+    title: "Saving 20+ hours per week for an enterprise ops team",
     metric: "20+",
     metricLabel: "Hours saved per week",
-    challenge:
-      "An enterprise operations team spent the majority of their time on manual reporting, data reconciliation across multiple systems, and answering repetitive cross-departmental questions.",
+    problem:
+      "An enterprise operations team spent the majority of their week on manual reporting, data reconciliation across multiple systems, and answering repetitive cross-departmental questions.",
     solution:
-      "BetterBrain automated daily and weekly reporting, connected disparate data sources for real-time reconciliation, and provided a self-serve Q&A interface for the broader organization.",
+      "BetterBrain automated daily and weekly reporting, connected disparate data sources for real-time reconciliation, and provided a self-serve Q&A interface for the broader organisation.",
     results: [
       "20+ hours per week freed up for strategic work",
       "Reporting turnaround reduced from days to minutes",
       "Cross-departmental queries handled autonomously",
-      "Dramatic improvement in sales team performance",
+      "Dramatic improvement in team productivity",
     ],
-    tags: ["Operations", "Reporting", "Data Insights"],
+    tags: ["Operations", "Reporting", "Productivity"],
   },
   "financial-services-compliance": {
     category: "Finance",
-    title: "Automating compliance review for a financial services firm",
-    metric: "84%",
-    metricLabel: "Faster review cycles",
-    challenge:
-      "A regulated financial institution needed to review thousands of documents for compliance, maintain audit trails, and ensure nothing slipped through the cracks — all while keeping pace with regulatory changes.",
+    title: "90% reduction in time spent on data requests",
+    metric: "90%",
+    metricLabel: "Reduction in data request time",
+    problem:
+      "A financial services data team was overwhelmed by ad hoc data requests from stakeholders. Most of the team's time went to answering questions rather than building data products.",
     solution:
-      "BetterBrain was configured to ingest regulatory documents alongside internal policies, flag compliance risks automatically, and maintain comprehensive audit trails with full source traceability.",
+      "BetterBrain provided a natural language interface to the company's data, enabling stakeholders to self-serve answers. The platform learned from each interaction, improving accuracy over time.",
     results: [
-      "84% faster compliance review cycles",
-      "Zero missed compliance flags since deployment",
-      "Full audit trail with source citations",
-      "Regulatory updates automatically incorporated",
+      "90% reduction in time spent on ad hoc data requests",
+      "Stakeholders able to self-serve common queries",
+      "Data team refocused on high-value analytics",
+      "Platform accuracy improved continuously with usage",
     ],
-    tags: ["Compliance", "Document Review", "Finance"],
+    tags: ["Financial Services", "Data Teams", "Self-Serve"],
   },
   "data-team-productivity": {
     category: "Data",
-    title: "10x productivity gains for a distributed data team",
-    metric: "10x",
-    metricLabel: "Productivity gain",
-    challenge:
+    title: "3x faster project completion for a distributed data team",
+    metric: "3x",
+    metricLabel: "Faster project completion",
+    problem:
       "A global data team spread across time zones struggled with knowledge silos, duplicated work, and slow insight delivery to business stakeholders who needed answers fast.",
     solution:
       "BetterBrain unified the team's knowledge base, automated data quality checks, and provided a natural language interface for stakeholders to self-serve common data requests.",
     results: [
-      "10x improvement in insight delivery speed",
+      "3x improvement in project completion speed",
       "Eliminated knowledge silos across time zones",
       "Self-serve data access reduced ad-hoc requests by 70%",
-      "Data quality issues caught 5x faster",
+      "Data quality issues caught significantly faster",
     ],
     tags: ["Data Teams", "Knowledge Management", "Global"],
   },
   "consulting-knowledge-management": {
     category: "Consulting",
-    title: "Transforming institutional knowledge for a management consultancy",
-    metric: "3x",
-    metricLabel: "Faster proposal turnaround",
-    challenge:
+    title: "15 hours saved per employee, every week",
+    metric: "15hrs",
+    metricLabel: "Saved per employee per week",
+    problem:
       "A growing consultancy's institutional knowledge was trapped in past proposals, deliverables, and the heads of senior partners. New consultants spent weeks getting up to speed on each engagement.",
     solution:
-      "BetterBrain ingested the firm's entire history of proposals, deliverables, and engagement notes, making institutional knowledge instantly searchable and reusable across the organization.",
+      "BetterBrain ingested the firm's entire history of proposals, deliverables, and engagement notes, making institutional knowledge instantly searchable and reusable across the organisation.",
     results: [
-      "3x faster proposal turnaround time",
+      "15 hours saved per employee per week",
       "New consultant onboarding reduced from weeks to days",
-      "Proposal win rate improved significantly",
+      "Proposal quality and consistency improved across the firm",
       "Senior partner time freed from repetitive knowledge transfer",
     ],
-    tags: ["Consulting", "Knowledge Unlocking", "Proposals"],
+    tags: ["Consulting", "Knowledge Unlocking", "Onboarding"],
   },
   "product-team-automation": {
     category: "Product",
-    title: "Automating product analytics and user feedback synthesis",
-    metric: "60%",
-    metricLabel: "Less manual analysis",
-    challenge:
-      "A product team was drowning in user feedback from multiple channels — support tickets, NPS surveys, app reviews, and sales call notes. Synthesizing this into actionable product decisions was a full-time job.",
+    title: "Unlocking hidden tribal knowledge at scale",
+    metric: "∞",
+    metricLabel: "Tribal knowledge preserved",
+    problem:
+      "Stakeholders were asking questions the data team didn't have the bandwidth to answer. Critical business knowledge existed only in people's heads, inaccessible to the rest of the organisation.",
     solution:
-      "BetterBrain connected to all feedback channels, automatically categorized and prioritized feature requests, and generated weekly insight reports that product leadership could act on immediately.",
+      "BetterBrain captured undocumented expertise, learned from the company's hidden tribal knowledge, and made every employee smarter by surfacing institutional intelligence in real time.",
     results: [
-      "60% reduction in manual analysis time",
-      "Feedback-to-insight cycle reduced from weeks to hours",
-      "Feature prioritization backed by comprehensive data",
-      "Weekly automated reports replaced manual quarterly reviews",
+      "Undocumented expertise captured and made searchable",
+      "Stakeholder questions answered without data team involvement",
+      "Throughput significantly increased across the organisation",
+      "No other tool in the market could learn hidden tribal knowledge",
     ],
-    tags: ["Product", "Analytics", "User Feedback"],
+    tags: ["Product", "Tribal Knowledge", "Scalability"],
   },
 };
 
@@ -142,19 +144,7 @@ export default async function CaseStudyPage({
               href="/case-studies"
               className="text-accent text-sm font-medium hover:text-accent-light transition-colors mb-6 inline-flex items-center gap-2"
             >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
+              <ArrowLeft className="w-4 h-4" />
               Back to Case Studies
             </Link>
             <span className="block text-accent text-sm font-semibold tracking-wider uppercase mt-6 mb-2">
@@ -163,11 +153,11 @@ export default async function CaseStudyPage({
             <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-6">
               {study.title}
             </h1>
-            <div className="flex flex-wrap gap-3 mb-8">
+            <div className="flex flex-wrap gap-3">
               {study.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="text-xs bg-surface border border-border rounded-full px-4 py-1.5"
+                  className="text-xs bg-surface border border-border rounded-sm px-4 py-1.5"
                 >
                   {tag}
                 </span>
@@ -181,7 +171,7 @@ export default async function CaseStudyPage({
       <section className="px-6 pb-16">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection animation="scale">
-            <div className="bg-surface border border-accent/20 rounded-2xl p-12 text-center">
+            <div className="bg-surface border border-accent/20 rounded-sm p-12 text-center">
               <span className="text-6xl md:text-8xl font-bold text-accent">
                 {study.metric}
               </span>
@@ -191,13 +181,13 @@ export default async function CaseStudyPage({
         </div>
       </section>
 
-      {/* Challenge */}
+      {/* Problem */}
       <section className="px-6 pb-16">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection animation="fade-up">
-            <h2 className="text-2xl font-bold mb-4">The Challenge</h2>
+            <h2 className="text-2xl font-bold mb-4">The Problem</h2>
             <p className="text-muted text-lg leading-relaxed">
-              {study.challenge}
+              {study.problem}
             </p>
           </AnimatedSection>
         </div>
@@ -219,23 +209,11 @@ export default async function CaseStudyPage({
       <section className="px-6 pb-24">
         <div className="max-w-4xl mx-auto">
           <AnimatedSection animation="fade-up">
-            <h2 className="text-2xl font-bold mb-6">The Results</h2>
+            <h2 className="text-2xl font-bold mb-6">The Number</h2>
             <ul className="space-y-4">
               {study.results.map((result) => (
                 <li key={result} className="flex items-start gap-3">
-                  <svg
-                    className="w-5 h-5 text-accent mt-1 shrink-0"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
+                  <Check className="w-5 h-5 text-accent mt-1 shrink-0" />
                   <span className="text-lg text-muted">{result}</span>
                 </li>
               ))}
@@ -245,17 +223,14 @@ export default async function CaseStudyPage({
       </section>
 
       <section className="py-24 px-6 bg-surface">
-        <AnimatedSection className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready for similar results?
-          </h2>
-          <Link
-            href="/get-started"
-            className="inline-block bg-accent hover:bg-accent/80 text-white px-10 py-4 rounded-lg text-lg font-medium transition-all hover:shadow-lg hover:shadow-accent/25"
-          >
-            Get Started
-          </Link>
-        </AnimatedSection>
+        <div className="max-w-4xl mx-auto text-center">
+          <AnimatedSection>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready for similar results?
+            </h2>
+            <DualCTA />
+          </AnimatedSection>
+        </div>
       </section>
     </>
   );
