@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
 
 const footerLinks = {
   Solutions: [
@@ -24,16 +23,6 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-surface">
       <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* CTA band */}
-        <div className="text-center mb-16 pb-16 border-b border-border">
-          <h3 className="text-2xl md:text-3xl font-bold mb-6">
-            Ready to get started?
-          </h3>
-          <Button href="/contact" variant="primary" size="lg">
-            Book a Discovery Workshop
-          </Button>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div>
             <Link href="/" className="flex items-center gap-3 mb-4">
