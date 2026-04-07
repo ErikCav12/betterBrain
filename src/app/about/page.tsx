@@ -45,6 +45,10 @@ const securityCards = [
   { icon: Lock, title: "Data Encryption", description: "End-to-end encryption at rest and in transit across every engagement." },
   { icon: Eye, title: "Access Controls", description: "Role-based permissions and audit logging for every system we build." },
   { icon: Check, title: "AI Governance", description: "Bias testing, model monitoring, and explainability baked into every deployment." },
+  { icon: Shield, title: "Data Residency", description: "Your data stays in your preferred region. We deploy where your compliance requires." },
+  { icon: Eye, title: "Human-in-the-Loop", description: "Critical decisions always have human oversight. No black-box AI on high-stakes workflows." },
+  { icon: Check, title: "GDPR & CCPA", description: "Full compliance with EU, UK, and US state privacy regulations across every engagement." },
+  { icon: Lock, title: "Secure by Default", description: "Every accelerator ships with security built in — not bolted on after deployment." },
 ];
 
 export function AboutPage() {
@@ -80,7 +84,7 @@ export function AboutPage() {
               </p>
             </AnimatedSection>
 
-            <AnimatedSection animation="fade-up" delay={200}>
+            <AnimatedSection animation="fade-up" delay={0.2}>
               <div className="grid grid-cols-2 gap-4">
                 {stats.map((stat) => (
                   <div
@@ -109,7 +113,7 @@ export function AboutPage() {
           </AnimatedSection>
           <div className="grid md:grid-cols-3 mt-16">
             {differentiators.map((item, i) => (
-              <AnimatedSection key={item.title} animation="fade-up" delay={i * 150}>
+              <AnimatedSection key={item.title} animation="fade-up" delay={i * 0.15}>
                 <div className={`py-2 px-8 ${i > 0 ? "md:border-l md:border-border" : ""}`}>
                   <div className="w-12 h-12 rounded-sm bg-accent/10 flex items-center justify-center mb-6">
                     <item.icon className="w-6 h-6 text-accent" />
@@ -137,7 +141,7 @@ export function AboutPage() {
 
           <div className="grid md:grid-cols-3 gap-8 mt-16">
             {teamMembers.map((member, i) => (
-              <AnimatedSection key={i} animation="fade-up" delay={i * 150}>
+              <AnimatedSection key={i} animation="fade-up" delay={i * 0.15}>
                 <div className="card-flip-muted rounded-sm border border-border p-8 text-center">
                   <div className="w-24 h-24 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
                     <Users className="w-10 h-10 text-accent" />
@@ -150,7 +154,7 @@ export function AboutPage() {
             ))}
           </div>
 
-          <AnimatedSection animation="fade-up" delay={500}>
+          <AnimatedSection animation="fade-up" delay={0.5}>
             <p className="text-center text-muted mt-12 text-lg">
               Backed by individuals from{" "}
               <span className="text-foreground font-medium">OpenAI</span>,{" "}
@@ -174,9 +178,9 @@ export function AboutPage() {
             />
           </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
             {securityCards.map((card, i) => (
-              <AnimatedSection key={card.title} animation="fade-up" delay={i * 100}>
+              <AnimatedSection key={card.title} animation="fade-up" delay={i * 0.08}>
                 <div className="card-flip rounded-sm border border-border p-6">
                   <div className="card-flip-icon w-10 h-10 rounded-sm bg-accent/10 flex items-center justify-center mb-4">
                     <card.icon className="w-5 h-5 text-accent" />
@@ -190,7 +194,7 @@ export function AboutPage() {
             ))}
           </div>
 
-          <AnimatedSection animation="fade-in" delay={500}>
+          <AnimatedSection animation="fade-in" delay={0.5}>
             <p className="text-center text-muted mt-12 text-lg">
               <span className="text-accent font-semibold">78%</span> of enterprises
               prioritise ethical AI when selecting consultants.

@@ -151,45 +151,6 @@ const engagementStages: EngagementStage[] = [
   },
 ];
 
-interface Capability {
-  title: string;
-  description: string;
-}
-
-const capabilities: Capability[] = [
-  {
-    title: "AI/ML Infrastructure",
-    description: "Scalable model serving and orchestration",
-  },
-  {
-    title: "RAG Pipelines",
-    description: "Retrieval-augmented generation at scale",
-  },
-  {
-    title: "Document Processing",
-    description: "Extraction, classification, and structuring",
-  },
-  {
-    title: "Data Structuring",
-    description: "Unstructured to structured data pipelines",
-  },
-  {
-    title: "Custom Search Systems",
-    description: "Semantic and hybrid search engines",
-  },
-  {
-    title: "Workflow Automation",
-    description: "Multi-step process orchestration",
-  },
-  {
-    title: "Entity Recognition",
-    description: "Named entity extraction and linking",
-  },
-  {
-    title: "Semantic Analysis",
-    description: "Meaning-aware text understanding",
-  },
-];
 
 /* ─── Page ─── */
 
@@ -312,34 +273,6 @@ export function SolutionsPage() {
                 </AnimatedSection>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* Capabilities */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto">
-          <AnimatedSection>
-            <SectionHeading
-              label="The IP Behind the Accelerators"
-              title="Deep technical capabilities"
-              centered
-            />
-          </AnimatedSection>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-6">
-            {capabilities.map((cap, i) => (
-              <AnimatedSection key={cap.title} animation="fade-up" delay={i * 0.05}>
-                <div className="border-b border-border pb-4">
-                  <h4 className="font-semibold text-foreground mb-1 text-sm">
-                    {cap.title}
-                  </h4>
-                  <p className="text-muted text-xs leading-relaxed">
-                    {cap.description}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
           </div>
         </div>
       </section>

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { DualCTA } from "@/components/DualCTA";
@@ -80,6 +81,7 @@ const lifecycleSteps = [
 
 const accelerators = [
   {
+    id: "bettersearch",
     icon: Search,
     name: "BetterSearch",
     subtitle: "Enterprise knowledge retrieval",
@@ -92,6 +94,7 @@ const accelerators = [
     ],
   },
   {
+    id: "betterdocs",
     icon: FileText,
     name: "BetterDocs",
     subtitle: "Document intelligence",
@@ -104,6 +107,7 @@ const accelerators = [
     ],
   },
   {
+    id: "betteragent",
     icon: Bot,
     name: "BetterAgent",
     subtitle: "Custom AI agents",
@@ -116,6 +120,7 @@ const accelerators = [
     ],
   },
   {
+    id: "bettervoice",
     icon: Mic,
     name: "BetterVoice",
     subtitle: "Voice agent automation",
@@ -127,6 +132,7 @@ const accelerators = [
     ],
   },
   {
+    id: "betterchat",
     icon: MessageSquare,
     name: "BetterChat",
     subtitle: "Conversational AI & chatbots",
@@ -139,6 +145,7 @@ const accelerators = [
     ],
   },
   {
+    id: "betterinsight",
     icon: BarChart3,
     name: "BetterInsight",
     subtitle: "Predictive analytics",
@@ -348,7 +355,10 @@ export function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {accelerators.map((a, i) => (
               <AnimatedSection key={a.name} animation="fade-up" delay={i * 0.1}>
-                <div className="card-flip bg-surface border border-border rounded-sm p-8 h-full flex flex-col">
+                <Link
+                  href={`/solutions#${a.id}`}
+                  className="block card-flip bg-surface border border-border rounded-sm p-8 h-full flex flex-col"
+                >
                   <a.icon className="card-flip-icon w-8 h-8 text-accent mb-4" />
                   <h3 className="text-xl font-bold mb-1">{a.name}</h3>
                   <p className="card-flip-muted text-muted text-sm mb-3">
@@ -368,7 +378,7 @@ export function Home() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </Link>
               </AnimatedSection>
             ))}
           </div>
@@ -456,22 +466,38 @@ export function Home() {
             ))}
           </div>
 
-          {/* Credentials */}
+          {/* Credentials — logos */}
           <AnimatedSection animation="fade-in" delay={0.3}>
-            <div className="text-center space-y-3">
-              <p className="text-muted text-sm">
-                Team from{" "}
-                <span className="text-foreground/80 font-medium">
-                  Carnegie Mellon, Stanford, Berkeley, Y Combinator, MITRE, PwC,
-                  CapSen Robotics
-                </span>
-              </p>
-              <p className="text-muted text-sm">
-                Backed by individuals from{" "}
-                <span className="text-foreground/80 font-medium">
-                  OpenAI, Samsung Next, Hustle Fund, Snowflake
-                </span>
-              </p>
+            <div className="space-y-8">
+              <div>
+                <p className="text-muted text-xs uppercase tracking-wider text-center mb-6">Team from</p>
+                <div className="flex flex-wrap items-center justify-center gap-10">
+                  {[
+                    { src: "/CMU.svg", alt: "Carnegie Mellon" },
+                    { src: "/stanford.svg", alt: "Stanford" },
+                    { src: "/berkeley.svg", alt: "Berkeley" },
+                    { src: "/y-combinator.svg", alt: "Y Combinator" },
+                    { src: "/mitre.svg", alt: "MITRE" },
+                    { src: "/pwc.svg", alt: "PwC" },
+                    { src: "/capsen.svg", alt: "CapSen Robotics" },
+                  ].map((logo) => (
+                    <img key={logo.alt} src={logo.src} alt={logo.alt} className="h-8 w-auto brightness-0 invert opacity-60 hover:opacity-100 transition-opacity" />
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="text-muted text-xs uppercase tracking-wider text-center mb-6">Backed by individuals from</p>
+                <div className="flex flex-wrap items-center justify-center gap-10">
+                  {[
+                    { src: "/openai.svg", alt: "OpenAI" },
+                    { src: "/samsung-next.svg", alt: "Samsung Next" },
+                    { src: "/hustle-fund.svg", alt: "Hustle Fund" },
+                    { src: "/snowflake.svg", alt: "Snowflake" },
+                  ].map((logo) => (
+                    <img key={logo.alt} src={logo.src} alt={logo.alt} className="h-8 w-auto brightness-0 invert opacity-60 hover:opacity-100 transition-opacity" />
+                  ))}
+                </div>
+              </div>
             </div>
           </AnimatedSection>
         </div>

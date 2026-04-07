@@ -36,20 +36,21 @@ export function ContactPage() {
                 <h2 className="text-2xl font-bold">Discovery Workshop</h2>
               </div>
               <p className="text-muted mb-6">
-                A focused session with our AI experts to map your data
-                landscape, identify high-value automation opportunities, and
-                define a clear path forward.
+                60 minutes with a senior AI engineer. No commitment required.
+                Bring a real workflow to get the most value.
               </p>
 
-              <div className="space-y-4 mb-8">
+              <div className="space-y-3 mb-8">
                 {[
-                  "60-minute deep dive with a senior AI engineer",
-                  "Walk away with a prioritised list of AI opportunities",
-                  "No commitment required",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-3 text-sm">
-                    <Check className="w-4 h-4 text-accent mt-0.5 shrink-0" />
-                    <span className="text-muted">{item}</span>
+                  { time: "5 min", label: "Overview of your business and AI goals" },
+                  { time: "30 min", label: "Workflow walkthrough — bring a real workflow" },
+                  { time: "5 min", label: "Showcase of relevant BetterBrain accelerators" },
+                  { time: "5 min", label: "Live prototype of a solution to your key pain point" },
+                  { time: "15 min", label: "Next steps and roadmap discussion" },
+                ].map((step) => (
+                  <div key={step.label} className="flex items-start gap-3 text-sm">
+                    <span className="text-accent font-bold text-xs w-12 shrink-0 mt-0.5">{step.time}</span>
+                    <span className="text-muted">{step.label}</span>
                   </div>
                 ))}
               </div>
