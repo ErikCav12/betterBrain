@@ -6,6 +6,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { DualCTA } from "@/components/DualCTA";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { CountUp } from "@/components/CountUp";
 import {
   Search,
   FileText,
@@ -399,9 +400,7 @@ export function Home() {
             {marketStats.map((s, i) => (
               <AnimatedSection key={s.stat} animation="fade-up" delay={i * 0.1}>
                 <div className={`py-2 px-8 text-center ${i > 0 ? "lg:border-l lg:border-border" : ""}`}>
-                  <p className="text-5xl font-bold text-accent mb-3">
-                    {s.stat}
-                  </p>
+                  <CountUp value={s.stat} className="text-5xl font-bold text-accent mb-3 block" />
                   <p className="text-muted leading-relaxed mb-4">
                     {s.description}
                   </p>
@@ -433,9 +432,7 @@ export function Home() {
                   key={m.value}
                   className="bg-surface border border-border rounded-sm p-8 text-center"
                 >
-                  <p className="text-4xl font-bold text-accent mb-2">
-                    {m.value}
-                  </p>
+                  <CountUp value={m.value} className="text-4xl font-bold text-accent mb-2 block" />
                   <p className="text-muted">{m.label}</p>
                 </div>
               ))}

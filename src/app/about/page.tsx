@@ -85,14 +85,23 @@ export function AboutPage() {
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up" delay={0.2}>
-              <div className="grid grid-cols-2 gap-4">
-                {stats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="card-flip rounded-sm border border-border p-6 text-center"
-                  >
-                    <p className="text-3xl font-bold text-accent">{stat.value}</p>
-                    <p className="text-sm text-muted mt-2">{stat.label}</p>
+              <div className="space-y-4">
+                {[
+                  { num: "01", time: "1-2 weeks", title: "AI Audit & Roadmap", desc: "Low-risk entry point. Prioritised roadmap with working prototypes." },
+                  { num: "02", time: "4-8 weeks", title: "Build & Deploy", desc: "Production-ready system built on proprietary accelerators." },
+                  { num: "03", time: "Ongoing", title: "Managed AI Ops", desc: "Monitoring, retraining, optimisation, and governance." },
+                ].map((stage) => (
+                  <div key={stage.num} className="flex items-start gap-4 bg-background border border-border rounded-sm p-5">
+                    <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white text-sm font-bold shrink-0">
+                      {stage.num}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-bold">{stage.title}</h4>
+                        <span className="text-xs bg-accent/20 text-accent px-2 py-0.5 rounded-sm font-semibold uppercase">{stage.time}</span>
+                      </div>
+                      <p className="text-sm text-muted">{stage.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -127,45 +136,6 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="py-24 bg-surface">
-        <div className="max-w-6xl mx-auto px-6">
-          <AnimatedSection animation="fade-up">
-            <SectionHeading
-              label="The Team"
-              title="Built by practitioners"
-              subtitle="Our team brings deep technical expertise from Carnegie Mellon, Stanford, Berkeley, and years of shipping AI systems at scale."
-              centered
-            />
-          </AnimatedSection>
-
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
-            {teamMembers.map((member, i) => (
-              <AnimatedSection key={i} animation="fade-up" delay={i * 0.15}>
-                <div className="card-flip-muted rounded-sm border border-border p-8 text-center">
-                  <div className="w-24 h-24 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-6">
-                    <Users className="w-10 h-10 text-accent" />
-                  </div>
-                  <h3 className="text-lg font-semibold">{member.name}</h3>
-                  <p className="text-sm text-accent-light mt-1">{member.role}</p>
-                  <p className="text-sm text-muted mt-3">{member.bio}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-
-          <AnimatedSection animation="fade-up" delay={0.5}>
-            <p className="text-center text-muted mt-12 text-lg">
-              Backed by individuals from{" "}
-              <span className="text-foreground font-medium">OpenAI</span>,{" "}
-              <span className="text-foreground font-medium">Samsung Next</span>,{" "}
-              <span className="text-foreground font-medium">Hustle Fund</span>, and{" "}
-              <span className="text-foreground font-medium">Snowflake</span>.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
-
       {/* Security */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-6">
@@ -181,7 +151,7 @@ export function AboutPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-16">
             {securityCards.map((card, i) => (
               <AnimatedSection key={card.title} animation="fade-up" delay={i * 0.08}>
-                <div className="card-flip rounded-sm border border-border p-6">
+                <div className="card-flip rounded-sm border border-border p-6 h-full">
                   <div className="card-flip-icon w-10 h-10 rounded-sm bg-accent/10 flex items-center justify-center mb-4">
                     <card.icon className="w-5 h-5 text-accent" />
                   </div>
