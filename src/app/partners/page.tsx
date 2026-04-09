@@ -193,7 +193,7 @@ export function PartnersPage() {
               We&apos;re building an ecosystem of best-of-breed AI partners.
               If your technology complements our stack, let&apos;s talk.
             </p>
-            <Button href="/contact" variant="primary" size="lg">
+            <Button href="https://calendly.com/betterbrain-founders/founders-30" variant="primary" size="lg">
               Become a Partner
             </Button>
           </AnimatedSection>

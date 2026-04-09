@@ -4,6 +4,7 @@ import { AnimatedHeadline } from "@/components/AnimatedHeadline";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { DualCTA } from "@/components/DualCTA";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { VideoPlayer } from "@/components/VideoPlayer";
 import {
   Search,
   FileText,
@@ -161,7 +162,7 @@ export function SolutionsPage() {
       <section className="pt-32 pb-16 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <AnimatedHeadline
-            text="Six accelerators. Proven across dozens of deployments."
+            text="Six pre-built modular accelerators. Proven across dozens of deployments."
             className="text-4xl md:text-6xl font-bold leading-tight tracking-tight mb-6"
           />
           <AnimatedSection animation="fade-up" delay={0.4}>
@@ -219,13 +220,9 @@ export function SolutionsPage() {
                     }`}
                   >
                     {acc.id === "betterdocs" ? (
-                      <video
+                      <VideoPlayer
                         src="/betterdocs-demo.mp4"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover"
+                        className="w-full h-full"
                       />
                     ) : (
                       <Icon className="w-20 h-20 text-accent opacity-30" />

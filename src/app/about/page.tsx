@@ -73,11 +73,11 @@ export function AboutPage() {
               <SectionHeading label="Our Mission" title="" centered={false} />
               <p className="text-lg text-muted mt-4 leading-relaxed">
                 BetterBrain was founded on a simple premise: mid-market companies
-                deserve the same AI capabilities as the Fortune 500 — without the
+                deserve the same AI capabilities as the Fortune 500, without the
                 Fortune 500 price tag or timeline.
               </p>
               <p className="text-lg text-muted mt-6 leading-relaxed">
-                We&apos;ve built proprietary AI infrastructure — years of R&amp;D baked
+                We&apos;ve built proprietary AI infrastructure, years of R&amp;D baked
                 into every engagement. Pre-built accelerators for search, documents,
                 agents, voice, chat, and analytics mean we deliver production AI in
                 weeks, not months.
@@ -85,6 +85,8 @@ export function AboutPage() {
             </AnimatedSection>
 
             <AnimatedSection animation="fade-up" delay={0.2}>
+              <SectionHeading label="How We Work" title="" centered={false} />
+              <h3 className="text-lg font-bold mt-4 mb-4">Our transparent approach to production deployment</h3>
               <div className="space-y-4">
                 {[
                   { num: "01", time: "1-2 weeks", title: "AI Audit & Roadmap", desc: "Low-risk entry point. Prioritised roadmap with working prototypes." },
