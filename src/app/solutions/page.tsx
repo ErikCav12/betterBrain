@@ -212,13 +212,24 @@ export function SolutionsPage() {
                     </ul>
                   </div>
 
-                  {/* Image placeholder */}
+                  {/* Visual */}
                   <div
-                    className={`bg-surface border border-border rounded-sm aspect-[4/3] flex items-center justify-center ${
+                    className={`bg-surface border border-border rounded-sm aspect-[4/3] flex items-center justify-center overflow-hidden ${
                       isEven ? "" : "lg:order-1"
                     }`}
                   >
-                    <Icon className="w-20 h-20 text-accent opacity-30" />
+                    {acc.id === "betterdocs" ? (
+                      <video
+                        src="/betterdocs-demo.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <Icon className="w-20 h-20 text-accent opacity-30" />
+                    )}
                   </div>
                 </div>
               </AnimatedSection>
